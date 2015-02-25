@@ -1,0 +1,95 @@
+body {
+    background-image: url("marketplace.jpg");
+    background-size: 100%;
+    background-repeat: repeat-y;
+}
+ @font-face {
+	font-family: 'WisdomScriptAJ';
+	src: url('Wisdom-Script.otf');
+	
+}
+
+.header{
+	color: #F5F5F7;
+	font-size: 30pt;
+	font-weight: bolder;
+	font-family: WisdomScriptAJ;
+	margin-right: 65%;
+	margin-bottom: 10px;
+	text-align: center;
+
+}
+.box{
+	background-color: rgba(235, 230, 236, 0.6);
+	background-size: 10% 50%;
+	margin-right: 10%;
+	margin-left: 10%;
+	margin-bottom: 10px;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	padding-left: 40%;
+	padding-right: 40%;
+
+
+}
+.rowHeader{
+	font-family: WisdomScriptAJ;
+	color: #010F13;
+	font-size: 20pt;
+	font-weight: 800;
+	display:inline-block;
+	text-align: center;
+}
+.sectionContainerHide {
+	display:none;
+	color:#248891;
+}
+.sectionContainer{
+	background-color: rgba(67, 42, 20, 0.8);
+	background-size: 10% 50%;
+	margin-right: 10%;
+	margin-left: 10%;
+	margin-bottom: 10px;
+	opacity: 0.8;
+	display:block;
+	font-family: 'Josefin Slab', serif;
+	color:white;
+	font-size: 14pt;
+	font-weight: bold;
+	text-align: center;
+
+}
+.sectionImg{
+	margin-left: 5%;
+	display: inline-block;
+	background-image: url("ArrowSide1.png");
+	height: 42px;
+	width: 42px;
+	background-size:42px 42px;
+
+}
+.sectionImg:hover{
+	background-image: url("ArrowSide2.png");
+}
+
+.rowlabel{
+	display: inline-block;
+}
+
+
+.searchBut{
+	margin-left: 90%;
+	background-image: url("SearchButton.png");
+	height: 80px;
+	width: 80px;
+	background-size:80px 80px;
+
+	font-family: 'Josefin Slab', serif;
+	color: #010F13;
+	font-size: 15pt;
+	font-weight: 800;
+	vertical-align: sub;
+}
+.searchBut:hover{
+	background-image: url("SearchButton2.png");
+}

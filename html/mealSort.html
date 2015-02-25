@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Young Eats</title>
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'>
+		<link href="mealSelect.css" type="text/css" rel="stylesheet" /> 
+
+
+ 
+  
+  <style type='text/css'>
+    body {  color:#fff; }		
+	.meals-wrap { float:left; width:20%; margin:0 5% 0 0; padding:0; }		
+	.filter-wrap { float:left; width:20%; margin:0 5% 0 0; padding:0; position:relative; }	
+	.meals { float:left; width:50%; }
+	.meals div { float:left; width:90%; height:68px; line-height:68px; padding:5% 5%; background:#ccc; color:#000; margin:0 0 1px; position:relative; }	
+  </style>
+  
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.3.js'></script>
+
+<script type='text/javascript'> 
+$(function(){
+var byTime = [], byRestriction = [], byMealtime = [];
+		
+		$("input[name=time]").on( "change", function() {
+			if (this.checked) byTime.push("[data-category~='" + $(this).attr("value") + "']");
+			else removeA(byTime, "[data-category~='" + $(this).attr("value") + "']");
+		});
+		
+		$("input[name=restrictions]").on( "change", function() {
+			if (this.checked) byRestriction.push("[data-category~='" + $(this).attr("value") + "']");
+			else removeA(byRestriction, "[data-category~='" + $(this).attr("value") + "']");
+		});
+		
+		$("input[name=mealtime]").on( "change", function() {
+			if (this.checked) byMealtime.push("[data-category~='" + $(this).attr("value") + "']");
+			else removeA(byMealtime, "[data-category~='" + $(this).attr("value") + "']");
+		});
+		
+		$("input").on( "change", function() {
+			var str = "Include items \n";
+			var selector = '', cselector = '', nselector = '';
+					
+			var $lis = $('.meals > div'),
+				$checked = $('input:checked');	
+				
+			if ($checked.length) {	
+			
+				if (byTime.length) {		
+					if (str == "Include items \n") {
+						str += "    " + "with (" +  byTime.join(',') + ")\n";				
+						$($('input[name=time]:checked')).each(function(index, byTime){
+							if(selector === '') {
+								selector += "[data-category~='" + byTime.id + "']";  					
+							} else {
+								selector += ",[data-category~='" + byTime.id + "']";	
+							}				 
+						});					
+					} else {
+						str += "    AND " + "with (" +  byTime.join(' OR ') + ")\n";				
+						$($('input[name=restrictions]:checked')).each(function(index, byTime){
+							selector += "[data-category~='" + byTime.id + "']";
+						});
+					}							
+				}
+				
+				if (byRestriction.length) {						
+					if (str == "Include items \n") {
+						str += "    " + "with (" +  byRestriction.join(' OR ') + ")\n";					
+						$($('input[name=restrictions]:checked')).each(function(index, byRestriction){
+							if(selector === '') {
+								selector += "[data-category~='" + byRestriction.id + "']";  					
+							} else {
+								selector += ",[data-category~='" + byRestriction.id + "']";	
+							}				 
+						});					
+					} else {
+						str += "    AND " + "with (" +  byRestriction.join(' OR ') + ")\n";				
+						$($('input[name=restrictions]:checked')).each(function(index, byRestriction){
+							if(cselector === '') {
+								cselector += "[data-category~='" + byRestriction.id + "']";  					
+							} else {
+								cselector += ",[data-category~='" + byRestriction.id + "']";	
+							}					
+						});
+					}			
+				}
+				
+				if (byMealtime.length) {			
+					if (str == "Include items \n") {
+						str += "    " + "with (" +  byMealtime.join(' OR ') + ")\n";				
+						$($('input[name=mealtime]:checked')).each(function(index, byMealtime){
+							if(selector === '') {
+								selector += "[data-category~='" + byMealtime.id + "']";  					
+							} else {
+								selector += ",[data-category~='" + byMealtime.id + "']";	
+							}				 
+						});				
+					} else {
+						str += "    AND " + "with (" +  byMealtime.join(' OR ') + ")\n";				
+						$($('input[name=mealtime]:checked')).each(function(index, byMealtime){
+							if(nselector === '') {
+								nselector += "[data-category~='" + byMealtime.id + "']";  					
+							} else {
+								nselector += ",[data-category~='" + byMealtime.id + "']";	
+							}	
+						});
+					}			 
+				}
+				
+				$lis.hide(); 
+				console.log(selector);
+				console.log(cselector);
+				console.log(nselector);
+				
+				if (cselector === '' && nselector === '') {			
+					$('.meals > div').filter(selector).show();
+				} else if (cselector === '') {
+					$('.meals > div').filter(selector).filter(nselector).show();
+				} else if (nselector === '') {
+					$('.meals > div').filter(selector).filter(cselector).show();
+				} else {
+					$('.meals > div').filter(selector).filter(cselector).filter(nselector).show();
+				}
+				
+			} else {
+				$lis.show();
+			}	
+								  
+			$("#result").html(str);	
+	
+		});
+		
+		function removeA(arr) {
+			var what, a = arguments, L = a.length, ax;
+			while (L > 1 && arr.length) {
+				what = a[--L];
+				while ((ax= arr.indexOf(what)) !== -1) {
+					arr.splice(ax, 1);
+				}
+			}
+			return arr;
+		}
+});</script>
+	<title>YoungEats</title>
+    <!--stylesheet link-->
+		<script src = "frontpage.css" rel = "stylesheet"></script>
+		<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	 
+		<!-- Bootstrap -->
+   		 <link href="C:/Users/glady_000/Documents/NewYoungEats/bootstrap/bootstrap-3.3.2-dist.zip/bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
+
+   		 <link rel = "stylesheet" type = "text/css" href = "frontpage.css"/>
+
+       <link href='http://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'/>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      var activeWindow;
+      $('a.modalLink').click(function(e){
+        e.preventDefault();
+        var id = $(this).attr('href');
+        activeWindow = $('.window#' + id)
+          .css('opacity', '0')
+          .css('top', '50%')
+          .css('left', '50%')
+          .fadeTo(500, 1);
+
+      $('#modal')
+        .append('<div id = "blind" />')
+        .find('#blind')
+        .css('opacity', '0')
+        .fadeTo(500, 0.8)
+        .click(function(e){
+          closeModal();
+        });
+
+      });
+    $('a.close').click(function(e){
+      e.preventDefault();
+      closeModal();
+    });
+    function closeModal(){
+      activeWindow.fadeOut(250, function(){$(this).css('top', '-1000px').css('left', '-1000px'); });
+      $('#blind').fadeOut(250, function(){$(this).remove(); });
+    }
+    });
+
+
+</script>
+    
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="bootstrap/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+
+ 
+	</head>
+	<body class = "main">
+  
+		
+  <!--Navigation--> 	
+
+	<div id = "nav">
+    <div class = "navbar col-md-4" >
+				<ul class = "list-inline pull-left">
+          
+          <!--My Account Button-->
+					<li id = "button1" style = "color:white; font-size: 100%; font-family: 'Josefin Slab', serif;" >
+             <a href = "" style = "color:#248891; text-decoration:none;" >MY ACCOUNT </a>
+          </li>
+
+          <!--About Button-->
+					<li id = "button2" style = "color:white; font-size: 100%;font-family: 'Josefin Slab', serif;">
+            <a href = "" style = "color:#248891; text-decoration: none;"> ABOUT </a>
+          </li>
+
+          <!--Find A Recipe Button-->
+					<li id = "button3" style = "color:white; font-size: 100%; font-family: 'Josefin Slab', serif;">
+            <a href = "" style = "color:#248891; text-decoration: none;">FIND A RECIPE </a>
+          </li>
+
+				</ul>
+      </div>
+
+<!--Logo-->
+      <ul class = "navbar col-md-4" id = "logo">
+          <li>YoungEats</li>
+      </ul>
+
+
+      <div class = "navbar col-md-4">
+				<ul class = "list-inline pull-right">
+<!--Log in button-->
+					<li id = "button4" style = "color:#2EACB8;font-size: 100%;font-family: 'Josefin Slab', serif;">
+            <a href = "dialog" class = "modalLink" data rel = "dialog"  style = "color:#248891; text-decoration: none;">LOG IN </a>
+          </li>
+
+<!--Search button-->
+					<li id = "button5" style = "color:#2EACB8;font-size: 100%;font-family: 'Josefin Slab', serif;" onclick = "div_show()">
+            <a href = "" style = "color:#248891; text-decoration: none;">SEARCH</a>
+          </li>
+
+
+				</ul>
+      </div>
+		</div>
+	</div>
+  
+<!--Modal Widow-->
+<div id="modal">
+  <div id="dialog" class="window">
+    <div class="contents">
+        <h3>Log In</h3>
+        <form style = "color: black; font-size: 100%; font-family: 'Josefin Slab', serif;">
+          <table>
+            <tr>
+              <td>Email</td>
+              <td><input type="text" name="email"></td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+              <td>Password</td>
+              <td><input type = "password" name = "password"></td>
+            </tr>
+            </table>
+                <input type = "submit" value = "Log In!" style = "font-family: 'WisdomScriptAJ'; font-size: 90%; color: white; background-color: #248891; border = none;">
+          </form>
+        
+        <hr>
+        <h4 style = "color: black; font-size: 100%; font-family: 'Josefin Slab', serif;">Not a member?<a href = ""> Sign up!</a></h4>
+
+        <a href="#" class="close" style = "font-family: 'Josefin Slab';">Close</a>
+    </div>
+  </div>
+</div>
+
+			<div id = "rightMenu">
+            
+                <h3>Meals</h3>			                
+				<p><strong>Select Mealtime</strong></p>
+                <form>
+                	<label><input type="checkbox" name="mealtime" value="breakfast" id="breakfast" />Breakfast</label><br>
+                    <label> <input type="checkbox" name="mealtime" value="lunch" id="lunch" />Lunch</label><br>
+					<label><input type="checkbox" name="mealtime" value="dinner" id="dinner" />Dinner</label><br>
+                    <label> <input type="checkbox" name="mealtime" value="dessert" id="dessert" />Dessert</label><br>
+					<label> <input type="checkbox" name="mealtime" value="snack" id="snack" />Snack</label><br>
+
+                </form>    				
+				
+				
+                <p><strong>Filter by time:</strong></p>
+                <form>
+                    <label><input type="checkbox" name="time" value="10" id="10" /> 10 minutes</label><br>
+                    <label><input type="checkbox" name="time" value="10_30" id="10_30" /> 10-30 minutes</label><br> 
+                    <label><input type="checkbox" name="time" value="30_45" id="30_45" /> 30-45 minutes</label><br>                     
+                    <label><input type="checkbox" name="time" value="45_60" id="45_60" /> 45-60 minutes</label><br>
+                    <label><input type="checkbox" name="time" value="60" id="60" /> > 1 hour</label><br>  
+
+                </form>
+                <p><strong>Dietary Restrictions:</strong></p>
+                <form>
+                	<label><input type="checkbox" name="restrictions" value="dairyfree" id="dairyfree" /> Dairy-Free</label><br>
+                    <label><input type="checkbox" name="restrictions" value="glutenfree" id="glutenfree" /> Gluten-Free</label><br>
+                    <label><input type="checkbox" name="restrictions" value="vegetarian" id="vegetarian" /> Vegetarian</label><br>                  
+                    <label><input type="checkbox" name="restrictions" value="vegan" id="vegan" /> Vegan</label><br>
+                    <label><input type="checkbox" name="restrictions" value="nutallergy" id="nutallergy" /> Nut Allergy</label>
+	
+					
+                </form>  
+	
+                
+                                            
+          	</div>
+          
+                
+          	</div>
+            <br>
+            <div class="meals">
+            	<div class="meal" data-id="eggsbenedict" data-category="breakfast 30_45 nutallergy">Eggs Benedict</div>
+           		<div class="meal" data-id="eggplantparm" data-category="vegetarian 60 dinner">Eggplant Parmesian </div>
+           		<div class="meal" data-id="grilledcheese" data-category="lunch snack 10_30">Grilled Cheese Sandwich </div>
+       			<div class="meal" data-id="cremebrulee" data-category="60   dessert">Creme Brulee </div>  
+                <div class="meal" data-id="guacamole" data-category="10  glutenfree snack">Guacamole</div>  
+                <div class="meal" data-id="blueberrypancakes" data-category="10_30 breakfast vegetarian">Blueberry Pancakes </div>  
+                <div class="meal" data-id="meal" data-category="30_45 vegan breakfast">Meal 1 </div> 
+                <div class="meal" data-id="meal2" data-category="glutenfree 45_60 breakfast">Meal 2 </div> 
+                <div class="meal" data-id="meal3" data-category="vegan vegetarian 60 lunch">Meal 3 </div> 
+              	
+       		</div>
+  
+</body>
+
+
+</html>
+

@@ -1,0 +1,150 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+		<title>YoungEats</title>
+		<link href='http://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'>
+		
+		<link href="mealSelect.css" type="text/css" rel="stylesheet" />
+		 
+    	<script src="mealSelect.js"></script>
+    	
+    			<!-- Bootstrap -->
+   		 <link href="C:/Users/glady_000/Documents/NewYoungEats/bootstrap/bootstrap-3.3.2-dist.zip/bootstrap-3.3.2-dist/css/boostrap.min.css" rel="stylesheet">
+
+   		 
+
+       <link href='http://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'/>
+       <link rel = "stylesheet" type = "text/css" href = "frontpage.css"/>
+ 
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    	
+  <script>
+    $(document).ready(function(){
+      var activeWindow;
+      $('a.modalLink').click(function(e){
+        e.preventDefault();
+        var id = $(this).attr('href');
+        activeWindow = $('.window#' + id)
+          .css('opacity', '0')
+          .css('top', '50%')
+          .css('left', '50%')
+          .fadeTo(500, 1);
+
+      $('#modal')
+        .append('<div id = "blind" />')
+        .find('#blind')
+        .css('opacity', '0')
+        .fadeTo(500, 0.8)
+        .click(function(e){
+          closeModal();
+        });
+
+      });
+    $('a.close').click(function(e){
+      e.preventDefault();
+      closeModal();
+    });
+    function closeModal(){
+      activeWindow.fadeOut(250, function(){$(this).css('top', '-1000px').css('left', '-1000px'); });
+      $('#blind').fadeOut(250, function(){$(this).remove(); });
+    }
+    });
+
+
+	</script>
+</head>
+	
+<body>
+
+	<!--Navigation--> 	
+
+	<div id = "nav">
+    <div class = "navbar col-md-4" >
+			<ul class = "list-inline pull-left">
+          
+        	<!--My Account Button-->
+				<li id = "button1" style = "font-family: 'Josefin Slab', serif;" >
+             	<a href = "" style = "color:#248891; text-decoration:none;" >MY ACCOUNT </a>
+          		</li>
+
+          <!--About Button-->
+				<li id = "button2" style = "font-family: 'Josefin Slab', serif;">
+            	<a href = "" style = "color:#248891; text-decoration: none;"> ABOUT </a>
+          		</li>
+
+          <!--Find A Recipe Button-->
+				<li id = "button3" style = "font-family: 'Josefin Slab', serif;">
+            	<a href = "" style = "color:#248891; text-decoration: none;">FIND A RECIPE </a>
+          		</li>
+
+			</ul>
+    </div>
+
+	<!--Logo-->
+    <ul class = "navbar col-md-4" id = "logo">
+        <li>YoungEats</li>
+    </ul>
+
+
+    <div class = "navbar col-md-4">
+		<ul class = "list-inline pull-right">
+<!--Log in button-->
+			<li id = "button4" style = "color:#2EACB8;font-family: 'Josefin Slab', serif;">
+            	<a href = "dialog" class = "modalLink" data rel = "dialog"  style = "color:#248891; text-decoration: none;">LOG IN </a>
+          	</li>
+
+<!--Search button-->
+			<li id = "button5" style = "color:#2EACB8;font-size: 100%;font-family: 'Josefin Slab', serif;" onclick = "div_show()">
+            	<a href = "" style = "color:#248891; text-decoration: none;">SEARCH</a>
+          </li>
+
+
+				</ul>
+      </div>
+		</div>
+	</div>
+  
+<!--Modal Widow-->
+<div id="modal">
+  <div id="dialog" class="window">
+    <div class="contents">
+        <h3>Log In</h3>
+        <form style = "color: black; font-size: 100%; font-family: 'Josefin Slab', serif;">
+          <table>
+            <tr>
+              <td>Email</td>
+              <td><input type="text" name="email"></td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+              <td>Password</td>
+              <td><input type = "password" name = "password"></td>
+            </tr>
+            </table>
+                <input type = "submit" value = "Log In!" style = "font-family: 'WisdomScriptAJ'; font-size: 90%; color: white; background-color: #248891; border = none;">
+          </form>
+        
+        <hr>
+        <h4 style = "color: black; font-size: 100%; font-family: 'Josefin Slab', serif;">Not a member?<a href = ""> Sign up!</a></h4>
+
+        <a href="#" class="close" style = "font-family: 'Josefin Slab';">Close</a>
+    </div>
+  </div>
+</div>
+
+		<h1 style = "text-align: center;font-family: WisdomScriptAJ;
+	font-size:	200%;text-decoration:none;color:#248891;font-weight:bold;">I'm hungry for...</h1>
+		<div class="chooseFilters">
+			<div class="container">
+  					<ul style = "text-align: center">
+  						<a href='mealSort2.html'><li>Breakfast</li></a>
+  						<a href='mealSort2.html'><li>&nbsp;Lunch &nbsp;</li></a>
+  						<a href='mealSort2.html'><li>&nbsp;Dinner&nbsp;</li></a>
+  						<a href='mealSort2.html'><li>&nbsp;&nbsp;Snack&nbsp;&nbsp;</li></a>
+  					</ul>
+			</div>
+		</div>	
+	</body>
+</html>

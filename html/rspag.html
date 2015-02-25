@@ -1,0 +1,205 @@
+<html>
+
+<head>
+	<link rel = "stylesheet" type= "text/css" href = "recipe.css" >
+		<link href=<"http://fonts.googleapis.com/css?family=Josefin+Sans|Josefin+Slab" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="recipe.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel = "stylesheet" type= "text/css" href = "FoodItemLook.css" >
+		<link rel = "stylesheet" type = "text/css" href = "frontpage.css">
+		<link href="http://fonts.googleapis.com/css?family=Josefin+Sans|Josefin+Slab" rel="stylesheet" type="text/css">
+		<link rel = "stylesheet" src = "../Fonts/WisdomScript_Personal_License.zip/Wisdom-Script" type="text/css">
+		<script type="text/javascript" src="FoodSearch.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="C:/Users/glady_000/Documents/NewYoungEats/bootstrap/bootstrap-3.3.2-dist.zip/bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	  <style>
+        @font-face {
+    font-family: Cws;
+    src: url(Wisdom_Script_AJ.otf);
+    }
+  </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      var activeWindow;
+      $('a.modalLink').click(function(e){
+        e.preventDefault();
+        var id = $(this).attr('href');
+        activeWindow = $('.window#' + id)
+          .css('opacity', '0')
+          .css('top', '50%')
+          .css('left', '50%')
+          .fadeTo(500, 1);
+
+      $('#modal')
+        .append('<div id = "blind" />')
+        .find('#blind')
+        .css('opacity', '0')
+        .fadeTo(500, 0.8)
+        .click(function(e){
+          closeModal();
+        });
+
+      });
+    $('a.close').click(function(e){
+      e.preventDefault();
+      closeModal();
+    });
+    function closeModal(){
+      activeWindow.fadeOut(250, function(){$(this).css('top', '-1000px').css('left', '-1000px'); });
+      $('#blind').fadeOut(250, function(){$(this).remove(); });
+    }
+    });
+
+
+</script>
+</head>
+	<body>
+	
+  <!--Navigation--> 	
+
+	<div id = "nav">
+    <div class = "navbar col-md-4" >
+				<ul class = "list-inline pull-left">
+          
+          <!--My Account Button-->
+					<li id = "button1" style = "color:white; font-size: 100%; font-family: 'Josefin Slab', serif;" >
+             <a href = "" style = "color:#248891; text-decoration:none;" >MY ACCOUNT </a>
+          </li>
+
+          <!--About Button-->
+					<li id = "button2" style = "color:white; font-size: 100%;font-family: 'Josefin Slab', serif;">
+            <a href = "" style = "color:#248891; text-decoration: none;"> ABOUT </a>
+          </li>
+
+          <!--Find A Recipe Button-->
+					<li id = "button3" style = "color:white; font-size: 100%; font-family: 'Josefin Slab', serif;">
+            <a href = "" style = "color:#248891; text-decoration: none;">FIND A RECIPE </a>
+          </li>
+
+				</ul>
+      </div>
+
+<!--Logo-->
+      <ul class = "navbar col-md-4" id = "logo">
+          <li>YoungEats</li>
+      </ul>
+
+
+      <div class = "navbar col-md-4">
+				<ul class = "list-inline pull-right">
+<!--Log in button-->
+					<li id = "button4" style = "color:white;font-size: 100%;font-family: 'Josefin Slab', serif;">
+            <a href = "dialog" class = "modalLink" data rel = "dialog"  style = "color:#248891; text-decoration: none;">LOG IN </a>
+          </li>
+
+<!--Search button-->
+					<li id = "button5" style = "color:white;font-size: 100%;font-family: 'Josefin Slab', serif;" onclick = "div_show()">
+            <a href = "" style = "color:#248891; text-decoration: none;">SEARCH</a>
+          </li>
+
+
+				</ul>
+      </div>
+		</div>
+	</div>
+  
+      <!--Modal Widow-->
+<div id="modal">
+  <div id="dialog" class="window">
+    <div class="contents">
+        <h3>Log In</h3>
+        <form style = "color: black; font-size: 100%; font-family: 'Josefin Slab', serif;">
+          <table>
+            <tr>
+              <td>Email</td>
+              <td><input type="text" name="email"></td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+              <td>Password</td>
+              <td><input type = "password" name = "password"></td>
+            </tr>
+            </table>
+                <input type = "submit" value = "Log In!" style = "font-family: 'WisdomScriptAJ'; font-size: 90%; color: white; background-color: #373D6B; border = none;">
+          </form>
+        
+        <hr>
+        <h4 style = "color: black; font-size: 100%; font-family: 'Josefin Slab', serif;">Not a member?<a href = ""> Sign up!</a></h4>
+
+        <a href="#" class="close" style = "font-family: 'Josefin Slab';">Close</a>
+    </div>
+  </div>
+</div>
+		
+
+<body>
+<div class = "recipePage">
+	<div class = "recipeLeftColumn">
+		<div class = "recipeLeft-Top">
+			<div class = "title"> Spaghetti</div>
+			<hr>
+			<div class = "recipeImg"></div>
+		</div>
+		<div class = "recipeLeft-Bottom">
+			<div class ="addRecipeBook"> Add to Recipe Book </div>
+			<div class = "addCook"> Add to "To Cook" </div>
+			<div class = "seeNeed"> See What I Need </div>
+			<div class = "accountImg"></div>
+		</div>
+	</div>
+	<div class = "recipeRightColumn">
+		<div class = "recipeRight-Top">
+			<div class = "descriptionTitle">Description</div>
+			<hr>
+			<div class = "descriptionWords"> Will the address freak the minimalist? The memorable imperative moves yummy. Yummy expands. The unsuspecting ground steams. How will the employer forecast yummy? The background indents a laboratory.
+			</div> 
+			<div class = "totalTime">Total Time: 25 min </div>
+			<div class = "timeSection">
+				<div class = "minPrep"> Prep: 15 min</div>
+				<div class = "minCook">Cook: 10 min</div>
+			</div>   
+			<div class = "servingSize">Yield: 4 to 6 servings</div>
+			<div class = "level">Level: Intermediate</div>
+			<div class = "link"> <a href="gladyshilerio.com/Healthy_Spaghetti_Recipe">Recipe Link</a> </div>
+		</div>		
+		<div class = "recipeRight-Bottom">
+			<div class = "ingredientList">
+				<div class = "ingredientTitle">Ingredients</div>
+				<hr>
+				<div class = "ingredient">
+					1 pound dry spaghetti
+				</div>
+				<div class = "ingredient">
+					1 pound ground beef
+				</div>
+				<div class = "ingredient">
+					1/4 cup fresh cilantro leaves, chopped
+				</div>
+				<div class = "ingredient">
+					1 cup fresh tomatoes
+				</div>
+				<div class = "ingredient">
+					1/4 cup olive oil
+				</div>
+				<div class = "ingredient">
+					1 large red bell pepper, diced
+				</div>
+				<div class = "ingredient">
+					2 tablespoons tomato paste
+				</div>
+			</div>
+			<div class = "directions">
+				<hr>
+				<div class = "directionTitle"> Directions</div>
+				<div class = "directionWords"> The continent bowl vends the copyright pan. The graphical bookshop twists. The inventor freezes the journalist beneath an am mystery. How does the robust visitor kiss a corrupted sacrifice? Spaghetti denotes any straw pocket beside the anger. Spaghetti isolates the comedy past a victory. Above Spaghetti thinks the wealth. The syndicate brains the chat next to every zero wisdom. Spaghetti pretend.
+				</div>
+			</div>
+		</div> 
+	</div>
+</body>
+
+</html>
